@@ -20,6 +20,8 @@ const calculateOrderAmount = (items) => {
 app.post("/create-payment-intent", async (req, res) => {
   const { items } = req.body;
 
+
+
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
@@ -34,5 +36,8 @@ app.post("/create-payment-intent", async (req, res) => {
     clientSecret: paymentIntent.client_secret,
   });
 });
+
+
+
 
 app.listen(4242, () => console.log("Node server listening on port 4242!"));
