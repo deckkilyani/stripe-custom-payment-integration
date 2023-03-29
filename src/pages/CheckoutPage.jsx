@@ -19,10 +19,9 @@ console.log();
 export default function CheckoutPage() {
 
 
-  
   const [clientSecret, setClientSecret] = useState("");
   console.log(clientSecret);
-
+ 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("/create-payment-intent", {

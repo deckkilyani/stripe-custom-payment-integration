@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 require('dotenv').config()
+var cors = require('cors')
+app.use(cors())
 
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
@@ -28,25 +30,10 @@ const calculateOrderAmount = (items) => {
 
 
 app.post("/create-payment-intent", async (req, res) => {
-  /* const { items } = req.body; */
-  const items = [
-    { 
-      name: 'Coffee',
-      price: 10,
-      product_id: 'PKDH12',
-      quantity: 2
-    },
-    { 
-      name: 'Tea',
-      price: 8.25,
-      product_id: 'PKDH03',
-      quantity: 3
-    }
-  ];
-  // Create a PaymentIntent with the order amount and currency
+  const { items } = req.body;
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
-    currency: "usd",
+    currency: "thb",
     customer: "cus_NZhP2re3RpGNJe",
     metadata: {
       items: JSON.stringify(items),
@@ -62,6 +49,5 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 
-
-
 app.listen(4242, () => console.log("Node server listening on port 4242!"));
+
